@@ -1,7 +1,6 @@
 package io.javabrains.moviecatalogservice.models;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
@@ -9,11 +8,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 
 @Service
-public class RatingInfo {
+public class RatingInfoService {
 
     private final RestTemplate restTemplate;
 
-    public RatingInfo(RestTemplate restTemplate) {
+    public RatingInfoService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 

@@ -1,15 +1,12 @@
 package io.javabrains.moviecatalogservice.Controller;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.javabrains.moviecatalogservice.models.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,23 +16,23 @@ import java.util.stream.Collectors;
 public class CatalogController {
 
     private final RestTemplate restTemplate;
-    private final MovieInfo movieInfo;
-    private final RatingInfo ratingInfo;
+    private final MovieService movieService;
+    private final RatingInfoService ratingInfoService;
 
-    public CatalogController(RestTemplate restTemplate, MovieInfo movieInfo, RatingInfo ratingInfo) {
+    public CatalogController(RestTemplate restTemplate, MovieService movieService, RatingInfoService ratingInfoService) {
         this.restTemplate = restTemplate;
-        this.movieInfo = movieInfo;
-        this.ratingInfo = ratingInfo;
+        this.movieService = movieService;
+        this.ratingInfoService = ratingInfoService;
     }
 
 
     @RequestMapping("/{userId}")
     public List<Catalog> getCatalog(@PathVariable("userId") String userId) throws InterruptedException {
 
-        UserRating userRating = ratingInfo.getRatingFromRatingService(userId);
+        UserRating userRating = ratingInfoService.getRatingFromRatingService(userId);
         return userRating.getRatings().stream()
                 .map(rating -> {
-                    Movie movie = movieInfo.getMovieFromMovieService(rating);
+                    Movie movie = movieService.getMovieFromMovieService(rating);
                     return new Catalog(movie.getName(), movie.getDescription(), rating.getRating());
                 })
                 .collect(Collectors.toList());

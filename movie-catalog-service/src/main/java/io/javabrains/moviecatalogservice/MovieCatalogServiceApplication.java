@@ -26,7 +26,6 @@ public class MovieCatalogServiceApplication {
 
 		HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory();
 		clientHttpRequestFactory.setConnectionRequestTimeout(30000);
-
 		return new RestTemplate(clientHttpRequestFactory);
 	}
 }

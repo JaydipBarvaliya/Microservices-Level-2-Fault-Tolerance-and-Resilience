@@ -6,7 +6,6 @@ public class Rating {
     private int rating;
 
     public Rating() {
-
     }
 
     public Rating(String movieId, int rating) {

@@ -1,16 +1,17 @@
 package io.javabrains.moviecatalogservice.models;
 
-import com.netflix.discovery.converters.Auto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class MovieInfo {
+public class MovieService {
 
-    @Autowired
-    RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+
+    public MovieService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     @HystrixCommand(fallbackMethod = "movieServiceFallbackMethod")
     public Movie getMovieFromMovieService(Rating rating) {
