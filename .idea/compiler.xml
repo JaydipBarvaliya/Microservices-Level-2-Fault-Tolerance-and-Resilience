@@ -12,12 +12,6 @@
         <module name="moviecatalogservice" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="discoveryserver" target="19" />
-      <module name="movie-info-service" target="11" />
-      <module name="moviecatalogservice" target="11" />
-      <module name="ratings-data-service" target="11" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
